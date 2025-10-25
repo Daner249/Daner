@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Архив Крипи-пасты | Horror Lore Vault</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Основные стили */
+        :root {
+            --dark-bg: #0a0a0a;
+            --darker-bg: #050505;
+            --light-text: #e0e0e0;
+            --accent-red: #8b0000;
+            --accent-brown: #3a2718;
+            --parchment: #f5e9d5;
+            --old-paper: #e8dfca;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            line-height: 1.6;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.05"><rect width="100" height="100" fill="none" stroke="%238b0000" stroke-width="2"/></svg>');
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Шапка */
+        header {
+            background-color: var(--darker-bg);
+            padding: 20px 0;
+            border-bottom: 2px solid var(--accent-red);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.03"><path d="M0,0 L100,100 M100,0 L0,100" stroke="%238b0000" stroke-width="1"/></svg>');
+            pointer-events: none;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 2.5rem;
+            color: var(--accent-red);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            letter-spacing: 3px;
+            font-weight: normal;
+        }
+        
+        .logo p {
+            font-style: italic;
+            color: #aaa;
+            font-size: 1.1rem;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        nav li {
+            margin: 0 15px;
+        }
+        
+        nav a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 5px 10px;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: var(--accent-red);
+            border-bottom: 1px solid var(--accent-red);
+        }
+        
+        /* Основной контент */
+        main {
+            padding: 40px 0;
+        }
+        
+        .hero {
+            background-color: var(--darker-bg);
+            padding: 40px;
+            border: 1px solid #333;
+            margin-bottom: 40px;
+            position: relative;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" opacity="0.03"><rect x="10" y="10" width="180" height="180" fill="none" stroke="%238b0000" stroke-width="1"/></svg>');
+        }
+        
+        .hero h2 {
+            font-size: 2rem;
+            color: var(--accent-red);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--accent-red);
+            margin: 30px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+            text-align: center;
+        }
+        
+        /* Карточки игр */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .game-card {
+            background-color: var(--darker-bg);
+            border: 1px solid #333;
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(139, 0, 0, 0.3);
+        }
+        
+        .game-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(139, 0, 0, 0.1) 100%);
+            pointer-events: none;
+        }
+        
+        .game-card h3 {
+            color: var(--accent-red);
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+        
+        .game-card p {
+            color: #aaa;
+            font-size: 0.95rem;
+        }
+        
+        /* Анализ сюжета */
+        .analysis-section {
+            background-color: var(--darker-bg);
+            padding: 30px;
+            border: 1px solid #333;
+            margin-bottom: 40px;
+        }
+        
+        .analysis-item {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px dashed #333;
+        }
+        
+        .analysis-item:last-child {
+            border-bottom: none;
+        }
+        
+        .analysis-item h3 {
+            color: var(--accent-red);
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+        
+        /* Галерея существ */
+        .creatures-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .creature-card {
+            background-color: var(--darker-bg);
+            border: 1px solid #333;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .creature-image {
+            width: 100%;
+            height: 200px;
+            background-color: #222;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .creature-card h3 {
+            color: var(--accent-red);
+            margin-bottom: 10px;
+        }
+        
+        /* Крипи-пасты */
+        .creepy-pasta {
+            background-color: var(--darker-bg);
+            padding: 30px;
+            border: 1px solid #333;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .pasta-item {
+            margin-bottom: 25px;
+            padding: 20px;
+            background-color: rgba(58, 39, 24, 0.2);
+            border-left: 3px solid var(--accent-red);
+        }
+        
+        .pasta-item h3 {
+            color: var(--accent-red);
+            margin-bottom: 10px;
+        }
+        
+        /* Интерактивные карты */
+        .maps-section {
+            margin-bottom: 40px;
+        }
+        
+        .map-container {
+            background-color: var(--darker-bg);
+            padding: 30px;
+            border: 1px solid #333;
+            text-align: center;
+        }
+        
+        .map-placeholder {
+            width: 100%;
+            height: 400px;
+            background-color: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        /* Форма добавления контента */
+        .contribution-form {
+            background-color: var(--darker-bg);
+            padding: 30px;
+            border: 1px solid #333;
+            margin-bottom: 40px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--accent-red);
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            background-color: #111;
+            border: 1px solid #333;
+            color: var(--light-text);
+            font-family: 'Times New Roman', serif;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: var(--accent-red);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-family: 'Times New Roman', serif;
+        }
+        
+        .submit-btn:hover {
+            background-color: #6a0000;
+        }
+        
+        /* Подвал */
+        footer {
+            background-color: var(--darker-bg);
+            padding: 30px 0;
+            border-top: 2px solid var(--accent-red);
+            text-align: center;
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .logo h1 {
+                font-size: 2rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 5px 0;
+            }
+            
+            .hero {
+                padding: 20px;
+            }
+            
+            .hero h2 {
+                font-size: 1.6rem;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>АРХИВ КРИПИ-ПАСТЫ</h1>
+                <p>Horror Lore Vault</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#games">Игры</a></li>
+                    <li><a href="#analysis">Анализ сюжета</a></li>
+                    <li><a href="#creatures">Существа</a></li>
+                    <li><a href="#pasta">Крипи-пасты</a></li>
+                    <li><a href="#maps">Карты</a></li>
+                    <li><a href="#contribute">Добавить материал</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="container">
+        <section class="hero">
+            <h2>ХРАНИЛИЩЕ ТАЙН ХОРРОР-ВСЕЛЕННЫХ</h2>
+            <p>Добро пожаловать в архив, где собраны самые мрачные секреты, теории и лор знаменитых хоррор-игр. Откройте для себя скрытые смыслы, расшифруйте символизм и погрузитесь в атмосферу ужаса.</p>
+        </section>
+        
+        <section id="games">
+            <h2 class="section-title">БАЗА ДАННЫХ ПО ИГРАМ</h2>
+            <div class="games-grid">
+                <div class="game-card">
+                    <h3>Silent Hill</h3>
+                    <p>Город-призрак, отражающий самые тёмные уголки человеческой души. Исследуйте символизм и психологические аспекты.</p>
+                </div>
+                <div class="game-card">
+                    <h3>Resident Evil</h3>
+                    <p>Корпорация Umbrella, вирусы и зомби-апокалипсис. Полная хронология событий и анализ всех частей.</p>
+                </div>
+                <div class="game-card">
+                    <h3>Outlast</h3>
+                    <p>Психиатрическая лечебница Маунт-Мэссив и её ужасающие тайны. Документы, записи и скрытые сюжетные линии.</p>
+                </div>
+                <div class="game-card">
+                    <h3>FNAF</h3>
+                    <p>Пиццерия Фредди Фазбера и её кровавая история. Все теории, временные линии и секреты.</p>
+                </div>
+                <div class="game-card">
+                    <h3>Amnesia</h3>
+                    <p>Замок Бренненбург и амнезия Даниэля. Анализ сюжета, существ и психологического ужаса.</p>
+                </div>
+                <div class="game-card">
+                    <h3>Layers of Fear</h3>
+                    <p>Безумие художника, разворачивающееся в меняющемся особняке. Символизм и интерпретации.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="analysis">
+            <h2 class="section-title">РАСШИФРОВКА СЮЖЕТА</h2>
+            <div class="analysis-section">
+                <div class="analysis-item">
+                    <h3>Что на самом деле означают монстры в Silent Hill 2?</h3>
+                    <p>Глубокий анализ символики существ из Silent Hill 2 и их связи с психическим состоянием Джеймса Сандерленда. Пирамидоголовник как воплощение вины и наказания, Мэри как проекция его тоски по умершей жене.</p>
+                </div>
+                <div class="analysis-item">
+                    <h3>Истинная природа Мутантов в Resident Evil</h3>
+                    <p>Исследование эволюции биоорганического оружия от простых зомби до сложных химер. Связь между вирусами и философией корпорации Umbrella.</p>
+                </div>
+                <div class="analysis-item">
+                    <h3>Скрытые концовки FNAF: что они означают?</h3>
+                    <p>Анализ всех концовок серии Five Nights at Freddy's и их влияние на общую хронологию событий. Теории о личности Фиолетового парня и судьбе детей.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="creatures">
+            <h2 class="section-title">ГАЛЕРЕЯ СУЩЕСТВ И ПЕРСОНАЖЕЙ</h2>
+            <div class="creatures-gallery">
+                <div class="creature-card">
+                    <img src="image/V.jpg" alt="Пирамидоголовник">
+                    <h3>Пирамидоголовник</h3>
+                    <p>Silent Hill 2</p>
+                    <p>Воплощение вины и потребности в наказании</p>
+                </div>
+                <div class="creature-card">
+                    <img src="image/B.jpg" alt="Мистер Икс">
+                    <h3>Мистер Икс</h3>
+                    <p>Resident Evil 2</p>
+                    <p>Тиран T-00, преследующий протагонистов</p>
+                </div>
+                <div class="creature-card">
+                    <img src="image/M.jpg" alt="Изображение Уолрайта">
+                    <h3>Крис Уолрайт</h3>
+                    <p>Outlast</p>
+                    <p>Бывший священник, главный антагонист</p>
+                </div>
+                <div class="creature-card">
+                    <img src="image/D.jpg" alt="Спрингтрап">
+                    <h3>Спрингтрап</h3>
+                    <p>FNAF</p>
+                    <p>Аниматроник с душой Уильяма Афтона</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="pasta">
+            <h2 class="section-title">КОЛЛЕКЦИЯ КРИПИ-ПАСТ</h2>
+            <div class="creepy-pasta">
+                <div class="pasta-item">
+                    <h3>Записи из Сайлент Хилл</h3>
+                    <p>Расшифровки всех аудиозаписей, дневников и сообщений, найденных в городе-призраке. Скрытые истории жителей и их демонов.</p>
+                </div>
+                <div class="pasta-item">
+                    <h3>Документы Umbrella</h3>
+                    <p>Секретные файлы корпорации Umbrella, описывающие эксперименты с вирусами и создание биооружия.</p>
+                </div>
+                <div class="pasta-item">
+                    <h3>Записи из лечебницы Маунт-Мэссив</h3>
+                    <p>Медицинские карты, личные дневники пациентов и отчёты сотрудников, раскрывающие ужасы, творящиеся в стенах лечебницы.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="maps">
+            <h2 class="section-title">ИНТЕРАКТИВНЫЕ КАРТЫ</h2>
+            <div class="maps-section">
+                <div class="map-container">
+                    <img src="image/G.jpg" alt="Интерактивная карта Сайлент Хилл">
+                    <p>Исследуйте карту города Сайлент Хилл с отметками ключевых локаций, событий и скрытых объектов.</p>
+                </div>
+                <div class="map-container">
+                    <img src="image/P.jpg" alt="План поместья Спенсера">
+                    <p>Детальный план поместья Спенсера из Resident Evil с секретными проходами и расположением предметов.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contribute">
+            <h2 class="section-title">ДОБАВИТЬ СВОЮ НАХОДКУ ИЛИ ТЕОРИЮ</h2>
+            <div class="contribution-form">
+                <form id="contributionForm">
+                    <div class="form-group">
+                        <label for="name">Ваше имя (или псевдоним):</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="game">Игра:</label>
+                        <select id="game" name="game" required>
+                            <option value="">Выберите игру</option>
+                            <option value="silent-hill">Silent Hill</option>
+                            <option value="resident-evil">Resident Evil</option>
+                            <option value="outlast">Outlast</option>
+                            <option value="fnaf">Five Nights at Freddy's</option>
+                            <option value="amnesia">Amnesia</option>
+                            <option value="layers-of-fear">Layers of Fear</option>
+                            <option value="other">Другая</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Заголовок:</label>
+                        <input type="text" id="title" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Содержание:</label>
+                        <textarea id="content" name="content" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="type">Тип материала:</label>
+                        <select id="type" name="type" required>
+                            <option value="">Выберите тип</option>
+                            <option value="theory">Теория</option>
+                            <option value="finding">Находка</option>
+                            <option value="analysis">Анализ</option>
+                            <option value="pasta">Крипи-паста</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="submit-btn">Отправить в архив</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>Архив Крипи-пасты | Horror Lore Vault</p>
+            <p>© 2023 Все права на игровые вселенные принадлежат их правообладателям</p>
+            <p>Сайт создан для исследовательских целей</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Обработка формы
+        document.getElementById('contributionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Спасибо за ваш вклад! Ваш материал будет рассмотрен и добавлен в архив после проверки.');
+            this.reset();
+        });
+        
+        // Простая анимация при прокрутке
+        window.addEventListener('scroll', function() {
+            const cards = document.querySelectorAll('.game-card, .creature-card');
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (cardTop < windowHeight - 100) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        });
+        
+        // Инициализация анимации
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.game-card, .creature-card');
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            });
+            
+            // Запуск анимации после загрузки
+            setTimeout(() => {
+                window.dispatchEvent(new Event('scroll'));
+            }, 100);
+        });
+    </script>
+</body>
+</html>
